@@ -1,0 +1,15 @@
+#!/bin/bash 
+
+if [ $# -ne 1 ]; then
+	echo "Usage: $0 last_octet_of_ipaddress" >&2
+	exit 1
+fi
+
+if [ 0 -ge $1 -o $1 -ge 255 ]; then
+	echo "Usage: $0 last_octet_of_ipaddress" >&2
+	echo "       last_octet_of_ipaddress : 1 - 254"
+	exit 1
+fi
+
+ssh -A 192.168.10.$1
+

@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+
+import sys
+import os
+import subprocess
+
+NETWORKSETUP="/usr/sbin/networksetup"
+SUDO="/usr/bin/sudo"
+LINK="/bin/ln"
+
+def usage(locations):
+    print "Usage: %s %s" % (sys.argv[0], '|'.join(locations))
+    sys.exit(1)
+
+def get_locations():
+    l = subprocess.check_output((NETWORKSETUP, "-listlocations"))
+    return l.strip().split('\n')
+
+def switch_location(location):
+    with open(os.devnull) as FNULL:
+        subprocess.call(
+            (SUDO, NETWORKSETUP, "-switchtolocation", location),
+            stdout=FNULL
+        )
+
+def switch_ssh_config(location):
+    ssh_config_link = "%s/.ssh/config" % os.environ['HOME']
+    ssh_config_real = "%s.%s" % (ssh_config_link, location)
+    if os.path.isfile(ssh_config_real):
+        subprocess.call((LINK, "-sf", ssh_config_real, ssh_config_link))
+
+def main():
+    locations = get_locations()
+    if len(sys.argv) != 2:
+        usage(locations)
+    location = sys.argv[1]
+    if not location in locations:
+        usage(locations)
+    switch_location(location)
+    switch_ssh_config(location)
+
+if __name__ == "__main__":
+   main() 
