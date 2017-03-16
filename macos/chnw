@@ -1,4 +1,13 @@
 #!/usr/bin/env python
+#-------------------------------------------------------------------------------
+# It is necessary to enter a password to switch the network location.
+# Setting sudo makes it unnecessary to input a password.
+#
+# $ sudo visudo
+# ---
+# %admin          ALL = (ALL) NOPASSWD: /usr/sbin/networksetup
+# ---
+#-------------------------------------------------------------------------------
 
 import sys
 import os
