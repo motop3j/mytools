@@ -45,7 +45,7 @@ kterm*|xterm*)
     ;;
 esac 
 
-if [ "$SSH_AUTH_SOCK" = "" ]; then
+if [ "$SSH_AUTH_SOCK" = "" -o "$SSH_CONNECTION" = "" ]; then
 	echo -n "ssh-agent: "
 	source ~/.ssh-agent-info
 	ssh-add -l >&/dev/null
