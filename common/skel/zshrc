@@ -97,7 +97,8 @@ if [ -f "$HOME/.nvm/nvm.sh" ]; then
 fi
 
 EDITOR=vim
-export PATH EDITOR
+LESS=-q
+export EDITOR LESS
 
 # Common aliases
 if [ "$systemname" = "Darwin" -o "$systemname" = "FreeBSD" ]; then

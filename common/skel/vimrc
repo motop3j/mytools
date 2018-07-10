@@ -4,6 +4,7 @@ set fileencodings=utf-8,iso-2022-jp,ucs21e,ucs-2,cp932,euc-jp,latin1
 set ruler
 set modeline
 set textwidth=0
+set visualbell
 syntax on
 filetype on
 filetype plugin on
